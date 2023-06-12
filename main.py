@@ -13,9 +13,16 @@ brand_counts.columns = ['brand', 'count']
 brand_counts = brand_counts.head(5)
 figure_brands = px.bar(brand_counts, x='brand', y='count')
 
+#bar graph for Top 5 Categories
+top_categories = purchase_subset['category_code'].value_counts().head(5).reset_index()
+top_categories.columns = ['category','count']
+categories_figure = px.bar(top_categories, x='category', y='count')
+
 st.title('Sales Chart')
 
 fig1, fig2 = st.columns(2)
 
 with fig1:
     st.plotly_chart(figure_brands)
+with fig2:
+    st.plotly_chart(categories_figure)
