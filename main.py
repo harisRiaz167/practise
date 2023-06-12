@@ -24,6 +24,11 @@ categories_figure = px.bar(top_categories, x='category', y='count', color='categ
 st.title('Sales Chart')
 st.markdown('visulization for the sales data, important insight provided')
 
+card1, card2, card3, = st.columns(3)
+card1.metric("Views", "59685")
+card2.metric("Cart", "1085")
+card3.metric("Purchase", "1216")
+
 fig1, fig2 = st.columns(2)
 with fig1:
     st.plotly_chart(figure_brands)
