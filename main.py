@@ -2,6 +2,9 @@ import pandas as pd
 import plotly.express as px
 import streamlit as st
 
+#streamlit page config
+st.set_page_config(page_title='Sales Chart',  layout="wide")
+
 df = pd.read_csv('final.csv')
 
 # dataset for purchase items
@@ -16,12 +19,12 @@ figure_brands = px.bar(brand_counts, x='brand', y='count')
 #bar graph for Top 5 Categories
 top_categories = purchase_subset['category_code'].value_counts().head(5).reset_index()
 top_categories.columns = ['category','count']
-categories_figure = px.bar(top_categories, x='category', y='count')
+categories_figure = px.bar(top_categories, x='category', y='count', color='category')
 
 st.title('Sales Chart')
+st.markdown('visulization for the sales data, important insight provided')
 
 fig1, fig2 = st.columns(2)
-
 with fig1:
     st.plotly_chart(figure_brands)
 with fig2:
