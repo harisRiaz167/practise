@@ -34,3 +34,29 @@ with fig1:
     st.plotly_chart(figure_brands)
 with fig2:
     st.plotly_chart(categories_figure)
+
+# line graph for apple and huawei sale
+apple_purchase = purchase_subset[purchase_subset ['brand']=='apple']
+apple_purchase = apple_purchase.drop(['date'],axis=1)
+start_date = '06-09-2022'
+end_date = pd.to_datetime('today')  # Use today's date as the end date
+date_range = pd.date_range(start=start_date, end=end_date)
+
+# Assign the date range to the 'date' column in the DataFrame
+apple_purchase['date'] = date_range[:len(apple_purchase)]
+apple_purchase = apple_purchase[['brand','date','price']]
+huawei_purchase = purchase_subset[purchase_subset ['brand']=='huawei']
+huawei_purchase = huawei_purchase.drop(['date'],axis=1)
+start_date = '06-09-2022'
+end_date = pd.to_datetime('today')  # Use today's date as the end date
+date_range = pd.date_range(start=start_date, end=end_date)
+
+# Assign the date range to the 'date' column in the DataFrame
+huawei_purchase['date'] = date_range[:len(huawei_purchase)]
+huawei_purchase = huawei_purchase[['brand','date','price']]
+# fig_applesale = px.line(apple_purchase, x="date", y="price")
+# fig_huaweisale = px.line(huawei_purchase, x="date", y="price")
+farme = [apple_purchase, huawei_purchase]
+result = pd.concat(farme)
+resultfig = px.line(result, x="date", y="price", color="brand")
+st.plotly_chart(resultfig)
