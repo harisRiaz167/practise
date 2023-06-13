@@ -57,7 +57,7 @@ frame = [apple_purchase, huawei_purchase]
 result = pd.concat(frame)
 
 result_fig = px.line(result, x="date", y="price", color="brand", title='Brand Sales')
-st.plotly_chart(result_fig)
+st.plotly_chart(result_fig, use_container_width=True)
 
 # line graph for sales
 sales_data = purchase_subset.drop(['date'],axis=1)
@@ -69,4 +69,4 @@ date_range = pd.date_range(start=start_date, end=end_date)
 sales_data['date'] = date_range[:len(sales_data)]
 
 fig_sales = px.line(sales_data, x="date", y="sales", title='Sales')
-st.plotly_chart(fig_sales)
+st.plotly_chart(fig_sales, use_container_width=True)
