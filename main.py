@@ -1,6 +1,6 @@
 import pandas as pd
-import plotly.express as px
 import streamlit as st
+import plotly.express as px
 
 #streamlit page config
 st.set_page_config(page_title='Sales Chart',  layout="wide")
@@ -24,10 +24,12 @@ categories_figure = px.bar(top_categories, x='category', y='count', color='categ
 st.title('Sales Chart')
 st.markdown('visulization for the sales data, important insight provided')
 
+eventCount  = df['event_type'].value_counts().reset_index()
+eventCount.columns = ['events','count']
 card1, card2, card3, = st.columns(3)
-card1.metric("Views", "59685")
-card2.metric("Cart", "1085")
-card3.metric("Purchase", "1216")
+card1.metric(label= 'view', value= eventCount['count'].values[0])
+card2.metric(label="purchase",value=eventCount['count'].values[1])
+card3.metric(label="cart",value=eventCount['count'].values[2])
 
 fig1, fig2 = st.columns(2)
 with fig1:
