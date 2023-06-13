@@ -14,12 +14,12 @@ purchase_subset = df[df['event_type'] == 'purchase']
 brand_counts = purchase_subset['brand'].value_counts().reset_index()
 brand_counts.columns = ['brand', 'count']
 brand_counts = brand_counts.head(5)
-figure_brands = px.bar(brand_counts, x='brand', y='count')
+figure_brands = px.bar(brand_counts, x='brand', y='count', title='Top Brands')
 
 #bar graph for Top 5 Categories
 top_categories = purchase_subset['category_code'].value_counts().head(5).reset_index()
 top_categories.columns = ['category','count']
-categories_figure = px.bar(top_categories, x='category', y='count', color='category')
+categories_figure = px.bar(top_categories, x='category', y='count', color='category', title='Top Category')
 
 st.title('Sales Chart')
 st.markdown('visulization for the sales data, important insight provided')
@@ -56,7 +56,7 @@ huawei_purchase = huawei_purchase[['brand','date','price']]
 frame = [apple_purchase, huawei_purchase]
 result = pd.concat(frame)
 
-result_fig = px.line(result, x="date", y="price", color="brand")
+result_fig = px.line(result, x="date", y="price", color="brand", title='Brand Sales')
 st.plotly_chart(result_fig)
 
 # line graph for sales
@@ -68,5 +68,5 @@ end_date = pd.to_datetime('today')  # Use today's date as the end date
 date_range = pd.date_range(start=start_date, end=end_date)
 sales_data['date'] = date_range[:len(sales_data)]
 
-fig_sales = px.line(sales_data, x="date", y="sales")
+fig_sales = px.line(sales_data, x="date", y="sales", title='Sales')
 st.plotly_chart(fig_sales)
